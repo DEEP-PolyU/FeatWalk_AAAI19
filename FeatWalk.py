@@ -79,7 +79,7 @@ class featurewalk:
                         sentenceList.append([str(word) for word in sentence])
                 if splitnum >= 2 and blocki != splitnum - 1:  # If # Not enough memory, it is splited, and not the last iteration
                     if bulidflag:
-                        model = Word2Vec(sentenceList, size=self.d, window=self.win_size, min_count=0)
+                        model = Word2Vec(sentenceList, vector_size=self.d, window=self.win_size, min_count=0)
                         bulidflag = False
                     else:
                         model.build_vocab(sentenceList, update=True)
@@ -146,7 +146,7 @@ class featurewalk:
                     self.weight = (max_memory - memory1) / sumpath
                     sentenceList.extend(self.throughfeatur())
                     if bulidflag:
-                        model = Word2Vec(sentenceList, size=self.d, window=self.win_size, min_count=0)
+                        model = Word2Vec(sentenceList, vector_size=self.d, window=self.win_size, min_count=0)
                         bulidflag = False
                     else:
                         model.build_vocab(sentenceList, update=True)
@@ -162,7 +162,7 @@ class featurewalk:
                             sentenceList = []
                 del self.path_list, self.JListrow, self.qListrow, self.idx, self.JListcol, self.qListcol, self.idxListcol, self.allidx
         if bulidflag:
-            model = Word2Vec(sentenceList, size=self.d, window=self.win_size, min_count=0)
+            model = Word2Vec(sentenceList, vector_size=self.d, window=self.win_size, min_count=0)
         else:
             model.build_vocab(sentenceList, update=True)
             model.train(sentenceList, total_examples=len(sentenceList), epochs=model.iter)
